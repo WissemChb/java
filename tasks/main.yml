@@ -1,0 +1,11 @@
+---
+- name: "Install Java in RedHat systems"
+  include: java-{{ redhat_system }}.yml
+  when: ansible_os_family == "RedHat"
+
+- name: "Install Java in Debian systems"
+  include: java-{{ debian_system }}.yml
+  when: ansible_os_family == "Debian"
+  become: yes
+
+

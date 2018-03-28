@@ -1,0 +1,22 @@
+- name: "Update the system"
+  yum:
+    name: '*'
+    state: latest
+  become: yes
+  tags:
+    - system
+
+- name: "Download java rpm package ..."
+  get_url:
+    url: "{{ java_rpm_repo }}"
+    dest: $HOME
+    validate_certs: no
+    headers: "Cookie: oraclelicense=accept-securebackup-cookie" 
+
+- name: Install Java in the machine
+  yum:
+    name: "{{ ansible_env.HOME }}/{{ java_rpm_repo | urlsplit('path') | basename }}"
+    state: present
+  become: yes
+
+  

@@ -1,0 +1,33 @@
+#Installig dependancy
+- name: "Installing dependancy"
+  apt:
+    name:  "{{ item }}"
+    state: latest
+    update_cache: yes
+  with_items:
+    - software-properties-common
+    - python-software-properties
+    - debconf-utils
+
+#Installing java repository
+- name: "Installing java repository"
+  apt_repository:
+    repo: "{{ debian_java_repo }}"
+
+#Updating the system
+- name: "updating the system"
+  apt:
+    name: "*"
+    state: latest
+
+
+- name: "java Licence Agreement"
+  become: yes
+  shell:  echo "oracle-java9-installer shared/accepted-oracle-license-v1-1 select true" |  debconf-set-selections
+
+#Install java
+- name: "Installing Java"
+  apt:
+    name: oracle-java9-installer
+    state: latest
+
