@@ -9,13 +9,14 @@
 - name: "Download java rpm package ..."
   get_url:
     url: "{{ java_rpm_repo }}"
-    dest: $HOME
+    dest: /tmp
     validate_certs: no
-    headers: "Cookie: oraclelicense=accept-securebackup-cookie" 
+    headers: "Cookie: oraclelicense=accept-securebackup-cookie"
+  become: yes 
 
 - name: Install Java in the machine
   yum:
-    name: "{{ ansible_env.HOME }}/{{ java_rpm_repo | urlsplit('path') | basename }}"
+    name: "/tmp/{{ java_rpm_repo | urlsplit('path') | basename }}"
     state: present
   become: yes
 

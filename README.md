@@ -12,7 +12,7 @@ Role Variables
 
 The variables of this roles are: 
   - java_rpm_repo: This is the java RPM repository url  for RedHat systems by default it is for java 8 and  it can be overrided.
-  - debian_java_repo: This the Debian java repository url
+  - debian_java_repo: This is the Debian java repository url
 
 Dependencies
 ------------
