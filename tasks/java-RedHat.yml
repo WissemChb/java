@@ -6,13 +6,22 @@
   tags:
     - system
 
+#- name : "Install java in RedHat system"
+#  yum:
+#    name: {{item}}
+#    state: latest
+#  become: yes
+#  with_items:
+#    - java-1.8.0-openjdk
+#    - java-1.8.0-openjdk-devel
+
 - name: "Download java rpm package ..."
   get_url:
     url: "{{ java_rpm_repo }}"
     dest: /tmp
     validate_certs: no
-    headers: "Cookie: oraclelicense=accept-securebackup-cookie"
-  become: yes 
+    headers: "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie"
+  become: yes
 
 - name: Install Java in the machine
   yum:
